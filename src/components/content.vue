@@ -11,8 +11,8 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-  // border: 1px solid green;
   flex-grow: 1;
   flex-grow: 300px;
+  background: $color-dark;
 }
 </style>

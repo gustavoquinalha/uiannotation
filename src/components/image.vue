@@ -1,27 +1,87 @@
 <template lang="html">
   <div class="image">
 
-    <div class="text">
-      <h2><span>Projeto</span> Minds</h2>
-      <p>Words Attack</p>
+    <div class="text container align-items-center">
+      <router-link :to="{ name: 'products', params: {} }" class="text-icon margin-right-10">
+        <i class="fas fa-angle-left"></i>
+      </router-link>
+
+    <div class="">
+      <h2><span>Projeto</span> {{projects[0].name}}</h2>
+      <p>{{projects[0].products[0].name}}</p>
+    </div>
+
     </div>
 
     <div class="dots">
 
       <ul>
-        <li><div class="dot" style="top: 0.1%;left: 67%;"></div></li>
-        <li><div class="dot good" style="top: 2%;left: 91%;"></div></li>
-        <li><div class="dot bad" style="top: 11%;left: 24%;"></div></li>
+        <li><div class="dot good" style="top: 3.5%;left: 55%;"></div></li>
+        <li><div class="dot good" style="top: 3.5%;left: 85%;"></div></li>
+        <li><div class="dot bad" style="top: 71%;left: 50%;"></div></li>
       </ul>
 
-      <img src="../assets/images/2.jpg" width="100%" alt="">
-      <!-- <img src="../assets/images/1.png" width="100%" alt=""> -->
+      <img src="../assets/images/1.png" width="100%" alt="">
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      projects: [{
+        id: 1,
+        name: 'Minds EAD',
+        products: [{
+          name: 'Home',
+          image: '1.png',
+          dots: [{
+            id: 1,
+            title: 'Slider',
+            text: 'Slider na horizontal com cards',
+            type: 'good',
+            x: 100,
+            y: 130
+          }]
+        }, {
+          name: 'Contato',
+          image: '2.png',
+          dots: [{
+            id: 1,
+            title: 'Aumentar botao',
+            text: 'O botao esta muito apagado',
+            type: 'bad',
+            x: 242,
+            y: 534
+          }, {
+            id: 2,
+            title: 'Aumentar botao',
+            text: 'O botao esta muito apagado',
+            type: 'bad',
+            x: 242,
+            y: 534
+          }]
+        }]
+      }, {
+        id: 2,
+        name: 'Outra coisa',
+        products: [{
+          name: 'Home',
+          image: '1.png',
+          dots: [{
+            id: 1,
+            title: 'Slider',
+            text: 'Slider na horizontal com cards',
+            type: 'good',
+            x: 100,
+            y: 130
+          }]
+        }]
+      }]
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -32,12 +92,12 @@ export default {}
     background: $color-dark-2;
     padding: 20px;
     box-sizing: border-box;
-    min-height: 100vh;
+    height: 100vh;
     overflow: auto;
     position: relative;
-      img {
+    img {
         // filter: brightness(80%);
-      }
+    }
 }
 
 .image::-webkit-scrollbar {
@@ -81,11 +141,11 @@ export default {}
 
         &.good {
             background: $color-green;
-            box-shadow: 0 0 70px 10px $color-green;
+            box-shadow: 0 0 40px 10px darken($color-green, 5%);
         }
         &.bad {
             background: $color-red;
-            box-shadow: 0 0 70px 10px $color-red;
+            box-shadow: 0 0 40px 10px darken($color-red, 5%);
         }
     }
 }

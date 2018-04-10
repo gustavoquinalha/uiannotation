@@ -4,7 +4,7 @@
 
 .size {
   width: 1200px;
-  max-width: 90%;
+  max-width: 85%;
 }
 
 .margin {
@@ -22,4 +22,13 @@
 
 .hidden {
   overflow: hidden;
+}
+
+body {
+  background: $color-dark-2;
+  min-height: 100vh;
+}
+
+.object-fit_cover {
+  object-fit: cover;
 }

@@ -1,13 +1,6 @@
 <template>
   <div id="app">
     <router-view/>
-
-    <div class="container container-app">
-      <router-view name="image"/>
-      <router-view name="content"/>
-      <router-view name="sidebar" style="display: none"/>
-    </div>
-
   </div>
 </template>
 
@@ -23,8 +16,6 @@ export default {
 
   .container-app {
     height: 100vh;
-    // overflow-x: auto;
-    // overflow-y: hidden;
     background: $color-dark;
   }
 </style>
