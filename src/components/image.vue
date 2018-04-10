@@ -35,6 +35,9 @@ export default {}
     min-height: 100vh;
     overflow: auto;
     position: relative;
+      img {
+        // filter: brightness(80%);
+      }
 }
 
 .image::-webkit-scrollbar {
@@ -72,6 +75,7 @@ export default {}
         height: 22px;
         background: $color-grey;
         box-shadow: 0 0 50px 10px rgba(133,133,133,.5);
+        z-index: 9999;
         border-radius: 50%;
         position: absolute;
 
