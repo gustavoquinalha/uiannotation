@@ -1,28 +1,26 @@
 <template lang="html">
   <div class="image">
 
-    <div class="text container align-items-center">
+    <div class="text container align-items-center margin-bottom-20">
       <router-link :to="{ name: 'products', params: {} }" class="text-icon margin-right-10">
         <i class="fas fa-angle-left"></i>
       </router-link>
 
-    <div class="">
       <h2><span>Projeto</span> {{projects[0].name}}</h2>
+      <div class="margin-right-10 margin-left-10">/</div>
       <p>{{projects[0].products[0].name}}</p>
-    </div>
 
     </div>
 
     <div class="dots">
-
       <ul>
-        <li><div class="dot good" style="top: 3.5%;left: 55%;"></div></li>
-        <li><div class="dot good" style="top: 3.5%;left: 85%;"></div></li>
-        <li><div class="dot bad" style="top: 71%;left: 50%;"></div></li>
+        <li v-for="dot in projects[0].products[0].dots" v-bind:key="dot.id">
+          <div class="dot" :style="{ top: dot.y + '%', left: dot.x + '%'}" :class="{ good: dot.type === 'good', bad: dot.type === 'bad', think: dot.type === 'think'}"></div>
+        </li>
       </ul>
-
-      <img src="../assets/images/1.png" width="100%" alt="">
+        <img :src="require(`@/assets/images/${projects[0].products[0].image}`)" width="100%">
     </div>
+
   </div>
 </template>
 
@@ -41,8 +39,15 @@ export default {
             title: 'Slider',
             text: 'Slider na horizontal com cards',
             type: 'good',
-            x: 100,
-            y: 130
+            x: 23,
+            y: 20
+          }, {
+            id: 2,
+            title: 'Aumentar botao',
+            text: 'O botao esta muito apagado',
+            type: 'think',
+            x: 85,
+            y: 59
           }]
         }, {
           name: 'Contato',
@@ -52,15 +57,15 @@ export default {
             title: 'Aumentar botao',
             text: 'O botao esta muito apagado',
             type: 'bad',
-            x: 242,
-            y: 534
+            x: 23,
+            y: 20
           }, {
             id: 2,
             title: 'Aumentar botao',
             text: 'O botao esta muito apagado',
             type: 'bad',
-            x: 242,
-            y: 534
+            x: 85,
+            y: 59
           }]
         }]
       }, {
@@ -74,8 +79,8 @@ export default {
             title: 'Slider',
             text: 'Slider na horizontal com cards',
             type: 'good',
-            x: 100,
-            y: 130
+            x: 85,
+            y: 59
           }]
         }]
       }]
@@ -96,33 +101,21 @@ export default {
     overflow: auto;
     position: relative;
     img {
-        // filter: brightness(80%);
+        border: none;
+        border-radius: $radius;
     }
 }
 
 .image::-webkit-scrollbar {
-    width: 1em;
+    width: 0.5em;
 }
 
 .image::-webkit-scrollbar-track {}
 
 .image::-webkit-scrollbar-thumb {
-    background-color: $color-dark-3;
+    background-color: $color-dark;
+    border: 1px solid $color-dark-2;
     border-radius: 50px;
-}
-
-.text {
-    h2 {
-        color: $color-light;
-        font-size: 22px;
-        span {}
-    }
-    p {
-        color: $color-grey;
-        font-size: 14px;
-        line-height: 1;
-    }
-    margin-bottom: 20px;
 }
 
 .dots {
@@ -138,6 +131,7 @@ export default {
         z-index: 9999;
         border-radius: 50%;
         position: absolute;
+        transition: 0.3s;
 
         &.good {
             background: $color-green;
@@ -147,6 +141,26 @@ export default {
             background: $color-red;
             box-shadow: 0 0 40px 10px darken($color-red, 5%);
         }
+        &.think {
+            background: $color-blue;
+            box-shadow: 0 0 40px 10px darken($color-blue, 5%);
+        }
+
+        &:hover {
+            transform: scale(1.3, 1.3);
+        }
+    }
+}
+@media (max-width: 720px) {
+    .dots .dot {
+        width: 16px;
+        height: 16px;
+    }
+}
+@media (max-width: 480px) {
+    .dots .dot {
+        width: 10px;
+        height: 10px;
     }
 }
 </style>

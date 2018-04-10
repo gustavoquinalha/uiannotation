@@ -8,7 +8,7 @@
       </router-link>
 
       <div class="text">
-        <h2>Products <span>{{projects[0].name}}</span></h2>
+        <h2>{{projects[0].name}}</h2>
       </div>
     </div>
 
@@ -60,6 +60,13 @@ export default {
             type: 'good',
             x: 100,
             y: 130
+          }, {
+            id: 2,
+            title: 'Aumentar botao',
+            text: 'O botao esta muito apagado',
+            type: 'bad',
+            x: 242,
+            y: 534
           }]
         }, {
           name: 'Contato',

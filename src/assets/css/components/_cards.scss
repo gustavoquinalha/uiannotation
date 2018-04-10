@@ -27,18 +27,18 @@
 }
 
 .item__content {
-  background: $color-dark;
+  background: $color-dark-2;
   border-radius: $radius;
   height: 300px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
   overflow: hidden;
 
   img {
     width: 100%;
     object-fit: cover;
     height: 300px;
-    transition: 0.5s;
+    transition: 0.3s;
     filter: brightness(50%);
   }
 
@@ -48,7 +48,7 @@
 
     .add {
       font-size: 4rem;
-      transition: 0.5s;
+      transition: 0.3s;
     }
 
     &:hover {
@@ -62,13 +62,13 @@
 }
 
 .item {
-  transition: 0.5s;
+  transition: 0.3s;
   padding: 20px;
 
   &:hover {
     transform: translateY(-10px);
     .item__content {
-      background: $color-dark-3;
+      background: $color-dark;
       box-shadow: 0 10px 30px 10px rgba(0,0,0,.1);
 
       img {

@@ -13,6 +13,6 @@ export default {
 .content {
   flex-grow: 1;
   flex-grow: 300px;
-  background: $color-dark;
+  background: $color-dark-3;
 }
 </style>
