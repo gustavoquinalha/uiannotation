@@ -32,3 +32,15 @@ body {
 .object-fit_cover {
   object-fit: cover;
 }
+
+body::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+body::-webkit-scrollbar-track {}
+
+body::-webkit-scrollbar-thumb {
+    background-color: $color-dark;
+    border: 1px solid $color-dark-2;
+    border-radius: 50px;
+}

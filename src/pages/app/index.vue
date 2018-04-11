@@ -2,8 +2,13 @@
 <div class="">
 
 <div class="container">
-  <imageComponent/>
-  <contentComponent/>
+  <div class="flex-basis-400 flex-grow-1">
+    <imageComponent/>
+  </div>
+
+  <div class="">
+    <contentComponent/>
+  </div>
 </div>
 
 </div>
@@ -21,5 +26,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@media (max-width: 920px) {
+    .container {
+        flex-wrap: wrap;
+    }
+}
 </style>
