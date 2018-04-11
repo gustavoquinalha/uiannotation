@@ -2,13 +2,8 @@
 <div class="">
 
 <div class="container">
-  <div class="flex-basis-400 flex-grow-1">
-    <imageComponent/>
-  </div>
-
-  <div class="">
-    <contentComponent/>
-  </div>
+  <imageComponent class="flex-basis-400 flex-grow-1"/>
+  <contentComponent/>
 </div>
 
 </div>

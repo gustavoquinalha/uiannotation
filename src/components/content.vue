@@ -185,6 +185,7 @@ export default {
 @media (max-width: 920px) {
     .content {
         max-width: 100%;
+        width: 100%;
         height: auto;
     }
     .container-cards {
@@ -192,6 +193,7 @@ export default {
     }
     .list__content {
         height: auto;
+        width: 100%;
     }
     .btn__content {
         display: none;
