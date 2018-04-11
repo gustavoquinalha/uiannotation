@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
 
-    <div class="image__head">
+    <div class="image__head container wrap align-items-center justify-content-between">
       <div class="text container align-items-center">
         <router-link :to="{ name: 'products', params: {} }" class="text-icon margin-right-10">
           <i class="fas fa-angle-left"></i>
@@ -10,17 +10,25 @@
         <h2><span>Projeto</span> {{projects[0].name}}</h2>
         <p class="margin-left-10">{{projects[0].products[0].name}}</p>
       </div>
+
+      <div class="slide" @click="showDots = !showDots">
+        <div class="slide__ball" :class="{show: showDots === true}"></div>
+      </div>
+
     </div>
 
     <div class="image">
       <div class="dots">
-        <ul>
+        <ul v-show="showDots === true">
           <li v-for="(dot, index) in projects[0].products[0].dots" v-bind:key="dot.id">
-            <div class="dot" :style="{ top: dot.y + '%', left: dot.x + '%'}" :class="{ good: dot.type === 'good', bad: dot.type === 'bad', think: dot.type === 'think'}">{{index + 1}}</div>
+            <div class="dot shadow" :style="{ top: dot.y + '%', left: dot.x + '%'}" :class="{ good: dot.type === 'good', bad: dot.type === 'bad', think: dot.type === 'think'}" @click="currentDot(dot)">
+              {{index + 1}}
+            </div>
           </li>
         </ul>
         <img :src="require(`@/assets/images/${projects[0].products[0].image}`)" width="100%">
       </div>
+      {{dotSelected}}
     </div>
   </div>
 </template>
@@ -29,6 +37,17 @@
 export default {
   data () {
     return {
+      dotSelected: {
+        id: null,
+        title: '',
+        text: '',
+        type: '',
+        x: null,
+        y: null
+      },
+
+      showDots: true,
+
       projects: [{
         id: 1,
         name: 'Minds EAD',
@@ -38,7 +57,7 @@ export default {
           dots: [{
             id: 1,
             title: 'Slider',
-            text: 'Slider na horizontal com cards',
+            text: 'Slider na horizontal com cards fluidos e animações etc e talz asd as das das dasdasdasdasdas sadasd',
             type: 'good',
             x: 23,
             y: 20
@@ -86,6 +105,16 @@ export default {
         }]
       }]
     }
+  },
+  methods: {
+    currentDot: function (dot) {
+      this.dotSelected.id = dot.id
+      this.dotSelected.title = dot.title
+      this.dotSelected.text = dot.text
+      this.dotSelected.type = dot.type
+      this.dotSelected.x = dot.x
+      this.dotSelected.y = dot.y
+    }
   }
 }
 </script>
@@ -98,6 +127,7 @@ export default {
     padding-left: 20px;
     padding-right: 20px;
 }
+
 .image {
     padding: 0 20px 20px;
     flex-basis: 300px;
@@ -126,42 +156,29 @@ export default {
     border-radius: 50px;
 }
 
-.dots {
-    position: relative;
-    ul {
-        list-style: none;
-    }
-    .dot {
+.slide {
+    width: 60px;
+    height: 30px;
+    background: $color-dark;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    .slide__ball {
         width: 22px;
         height: 22px;
         background: $color-grey;
-        box-shadow: 0 0 10px 5px rgba(0, 0, 0, .5);
-        z-index: 9999;
         border-radius: 50%;
-        position: absolute;
+        margin: 5px;
         transition: 0.3s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 12px;
-        color: $color-dark;
-        font-weight: bold;
-        cursor: pointer;
-        &.good {
+        &.show {
             background: $color-green;
-            box-shadow: 0 0 0 5px rgba($color-green, .4), 0 0 40px 10px rgba(0, 0, 0, .5);
+            transform: translateX(28px);
         }
-        &.bad {
-            background: $color-red;
-            box-shadow: 0 0 0 5px lighten($color-red, 10), 0 0 40px 10px rgba(0, 0, 0, .5);
-        }
-        &.think {
-            background: $color-blue;
-            box-shadow: 0 0 0 5px rgba($color-blue, .4), 0 0 40px 10px rgba(0, 0, 0, .5);
-        }
-        &:hover {
-            transform: scale(1.3, 1.3);
-        }
+    }
+    &:hover {
+        background: lighten($color-dark, 10);
     }
 }
 
@@ -176,11 +193,29 @@ export default {
     .dots .dot {
         width: 10px;
         height: 10px;
+        font-size: 8px;
+    }
+    .slide {
+        height: 20px;
+        width: 40px;
+        .slide__ball {
+            width: 14px;
+            height: 14px;
+            &.show {
+                transform: translateX(16px);
+            }
+        }
     }
 }
+
 @media (max-width: 920px) {
     .image {
         height: auto;
+        padding: 0;
+        overflow: hidden;
+        img {
+            border-radius: 0;
+        }
     }
 }
 </style>

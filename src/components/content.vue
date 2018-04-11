@@ -3,28 +3,61 @@
 
     <div class="head__content">
       <div class="text">
-        <h2>Annotations</h2>
+        <div class="container align-items-center justify-content-between">
+          <h2>Annotations</h2>
+          <div class="">
+            <i class="fas fa-filter"></i>
+          </div>
+        </div>
         <hr>
       </div>
     </div>
 
     <div class="list__content">
 
-      <div class="container-cards container column">
-        <div class="card" v-for="(card, index) in projects[0].products[0].dots" v-bind:key="card.id" :class="{ good: card.type === 'good', bad: card.type === 'bad', think: card.type === 'think'}">
+      <div class="container-cards container column" v-show="!dotSelected.id">
+        <div class="card" v-for="(card, index) in projects[0].products[0].dots" v-bind:key="card.id" :class="{ good: card.type === 'good', bad: card.type === 'bad', think: card.type === 'think'}" @click="currentDot(card)">
           <div class="title">
             <div class="margin-bottom-10">
               <span><b>{{index + 1}} - </b> {{card.title}}</span>
             </div>
-            <p>{{card.text}}</p>
+            <p class="block">{{card.text}}</p>
           </div>
         </div>
+      </div>
+
+      <div class="container-cards container column" v-show="dotSelected.id">
+
+        <div class="back__content container align-center">
+          <button type="button" name="button" class="btn btn-full" @click="resetCurrentDot()">
+            <i class="fas fa-angle-left margin-right-10"></i> Voltar
+          </button>
+        </div>
+
+        <div class="card" :class="dotSelected.type">
+          <div class="title">
+            <div class="margin-bottom-10">
+              <span><b>{{dotSelected.id}}</b> - {{dotSelected.title}}</span>
+            </div>
+            <p>{{dotSelected.text}}</p>
+          </div>
+        </div>
+
+        <div class="container__dots dots">
+          <ul class="container">
+            <li v-for="x in dots" v-bind:key="x">
+              <div class="dot normal shadow" :class="x" v-if="x === dotSelected.type"></div>
+              <div class="dot normal" :class="x" v-else></div>
+            </li>
+          </ul>
+        </div>
+
       </div>
 
     </div>
 
     <div class="btn__content">
-      <button type="button" name="button" class="btn">+</button>
+      <button type="button" name="button" class="btn btn-plus"><i class="fas fa-plus"></i></button>
     </div>
 
   </div>
@@ -34,6 +67,17 @@
 export default {
   data () {
     return {
+      dotSelected: {
+        id: null,
+        title: '',
+        text: '',
+        type: '',
+        x: null,
+        y: null
+      },
+
+      dots: ['default', 'good', 'bad', 'think'],
+
       projects: [{
         id: 1,
         name: 'Minds EAD',
@@ -90,6 +134,24 @@ export default {
           }]
         }]
       }]
+    }
+  },
+  methods: {
+    currentDot: function (card) {
+      this.dotSelected.id = card.id
+      this.dotSelected.title = card.title
+      this.dotSelected.text = card.text
+      this.dotSelected.type = card.type
+      this.dotSelected.x = card.x
+      this.dotSelected.y = card.y
+    },
+    resetCurrentDot: function () {
+      this.dotSelected.id = null
+      this.dotSelected.title = ''
+      this.dotSelected.text = ''
+      this.dotSelected.type = ''
+      this.dotSelected.x = null
+      this.dotSelected.y = null
     }
   }
 }
@@ -166,6 +228,10 @@ export default {
             line-height: 1.3;
             color: $color-white;
             opacity: 0.7;
+            &.block {
+                max-height: 40px;
+                overflow: hidden;
+            }
         }
     }
 }
@@ -180,6 +246,14 @@ export default {
     background-color: $color-dark;
     border: 1px solid $color-dark-2;
     border-radius: 50px;
+}
+
+.back__content {
+    padding: 0 10px 10px;
+}
+
+.container__dots {
+    padding: 10px 10px 0;
 }
 
 @media (max-width: 920px) {
